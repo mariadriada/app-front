@@ -11,19 +11,33 @@ import SearchBar from '../SearchBar/SearchBar'
 
 class Banner extends Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+
+        //this.handleSearch = this.handleSearch.bind(this)
+
         this.state = {
             city: 'Florida',
             enterprise: 'Medical Doctor',
             labelWidth: 0,
+            textTo: ''
         }
     }
 
     handleChange = event => {
         console.log('event', event.target)
         this.setState({ [event.target.name]: event.target.value });
-    };  
+    }
+
+    handleSearch = (text) => {
+        console.log('esta en handlesearch ', text)
+        this.setState({
+            textTo: text
+        })
+        this.props.textTo(this.state.textTo)
+        //this.props.textSearch = this.state.textTo
+    }
+    
 
     render(){
         let options1 = ['Florida', 'Other']
@@ -31,7 +45,7 @@ class Banner extends Component {
         return(
             <div className="Banner">
 
-                <div class="block">
+                <div className="block">
                     <label>Find CE for</label> 
 
                     <SelectElement
@@ -48,8 +62,8 @@ class Banner extends Component {
                     />
                 </div>
 
-                <div class="block">
-                    <SearchBar/>
+                <div className="block">
+                    <SearchBar textToSearch={this.handleSearch.bind(this)}/>
                 </div>
 
 

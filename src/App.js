@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div class="main-container">
+        <div className="main-container">
           <header className="App-header">
             <Menu changePage={this.onChangePage.bind(this)}></Menu>
           </header>        

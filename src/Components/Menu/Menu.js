@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 
 import Logo from '../Logo/Logo'
 import Item from '../Item/Item'
-import Courses from '../Courses/Courses'
+import CoursesPage from '../CoursesPage/CoursesPage'
 
 import './Menu.scss'
 
@@ -46,7 +46,7 @@ class Menu extends Component {
                     name: 'Browse courses', 
                     isActive:true, 
                     expand: false,
-                    content: <Courses/>
+                    content: <CoursesPage/>
                 },
                 { 
                     id: 4, 
@@ -67,7 +67,7 @@ class Menu extends Component {
 
     /*
      Set component state when menu option is selected
-     The component is showing in the dinamic container of App.hs
+     The component is showing in the dinamic container of App.js
     */
     setComponent(newComponent) {
         this.setState({

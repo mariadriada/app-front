@@ -1,0 +1,13 @@
+.CustomTag {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    li {
+        height: auto;
+        color: gray;
+        padding: 2px;  
+        display: flex;
+    }
+}

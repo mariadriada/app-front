@@ -1,0 +1,41 @@
+.CoursesCard {
+    display: flex;
+    
+    .information-container {
+        text-align: left; 
+        padding-left: 7px;  
+        width: 80%;
+
+        .name {
+            font-weight: 600;
+            margin-bottom:0;
+        }
+        .provider {
+            color: gray;
+            font-weight: 400;
+            margin-top:10px;
+        }
+        border:1px solid red;
+    }
+
+    .price-container {
+        width: 20%;
+        height: auto;
+        
+        div {
+            height: 50%;           
+            border: 1px solod blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-3{
+            color:gray;
+            transform: scaleX(-1);
+        }
+    }
+
+    
+   
+}

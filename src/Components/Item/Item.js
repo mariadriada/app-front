@@ -19,8 +19,6 @@ class Item extends Component {
        
     }   
 
-
-
     componentDidUpdate(prevProps, prevState, snapshop) {
         console.log('==================', prevState, snapshop)
     }

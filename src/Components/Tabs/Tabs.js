@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import CoursesCard from '../CoursesCard/CoursesCard'
 
 function TabContainer({ children, dir }) {
   return (
@@ -46,9 +47,15 @@ const styles = theme => ({
 });
 
 class TabsElement extends React.Component {
-  state = {
-    value: 0,
-  };
+
+  constructor(props){
+    super(props)
+
+    this.state={
+      value: 0,
+    }
+    this.textToSearch = ''
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -81,8 +88,13 @@ class TabsElement extends React.Component {
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer dir={theme.direction}>Item One</TabContainer>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
+          <TabContainer dir={theme.direction}>
+            <CoursesCard courseToSearch={this.props.textToSearch}/>
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+          { this.props.textToSearch}
+            Item Two
+          </TabContainer>
         </SwipeableViews>
       </div>
     );

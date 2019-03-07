@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -24,22 +24,38 @@ const styles = {
   iconButton: {
     padding: 10,
     color: 'gray'
-  },
-  
-  
+  },    
 };
 
-function SearchBar(props) {
-  const { classes } = props;
 
-  return (
-    <Paper className={classes.root} elevation={1}>
-       <IconButton className={classes.iconButton} aria-label="Search">
-        <SearchIcon />
-      </IconButton>
-      <InputBase className={classes.input} placeholder="Search courses and providers" />      
-    </Paper>
-  );
+class SearchBar extends Component{
+  constructor(props){
+    super(props)
+  }
+
+  search(e) {
+    let data = document.getElementById('inputSearch').value
+   
+    console.log(data.length)
+    if (data.length >= 3)
+    //Emit text to searh to parent element (Banner)
+    this.props.textToSearch(data)
+
+  }
+
+  render(){
+    const { classes } = this.props; 
+      return (
+        <Paper className={classes.root} elevation={1}>
+          <IconButton className={classes.iconButton} aria-label="Search">
+            <SearchIcon />
+          </IconButton>
+          <InputBase id="inputSearch" className={classes.input} placeholder="Search courses and providers"
+          />      
+        </Paper>
+      )
+    }
+   
 }
 
 SearchBar.propTypes = {
