@@ -1,0 +1,16 @@
+.Banner {
+    min-height: 25vh;
+    height: auto;
+    width: 100%;
+    background-color: blue;
+    
+    .block {  
+        padding-top: 1rem;      
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+}
