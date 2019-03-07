@@ -1,0 +1,18 @@
+.Logo{
+    
+    border: 1px solid red;
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        height: 3rem;
+    }
+
+    label {          
+        height: auto;
+        font-weight: 900;        
+    }
+    
+}
