@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button'
+
 import logo from './logo.svg';
+import Menu from './Components/Menu/Menu'
 import './App.scss';
 
-import Logo from './Logo/Logo'
+
 
 class App extends Component {
+
+  constructor(props) {
+    super()
+    this.state = {
+      component: <h3>Default</h3>
+    }
+  }
+
+  onChangePage(newComponent){
+    console.log('conchangepage')
+    this.setState({
+      component: newComponent
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-       
+        <div class="main-container">
+          <header className="App-header">
+            <Menu changePage={this.onChangePage.bind(this)}></Menu>
+          </header>        
+          <section className="dinamic-content">
+            { this.state.component }
+          </section>
+        </div>
       </div>
     );
   }
