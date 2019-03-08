@@ -16,17 +16,13 @@ export default class CoursesCard extends Component {
         super()
 
         this.state = {
-            features: [],
             courses: [],
-            coursesInitial: [],
             totalItems: 0,
             searchBar: null,
-            filterActived: false,
             totalItems: null,
             currentPage: 1,
             nextPage: 2,
             prevPage: 1,
-
             pagination: []
         }
 
@@ -34,13 +30,12 @@ export default class CoursesCard extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount')
 
         // Capture the filter element
         let element = document.getElementById('inputSearch')
         this.setState({searchBar: element})
-        console.log('llega elemento search a card ', element)
-        // Connect keyuo event to handler function
+        
+        // Connect keyup event to handler function
         element.addEventListener('keyup', this.searchCourse.bind(this))
 
         // Call to data API
@@ -91,7 +86,7 @@ export default class CoursesCard extends Component {
             ${page}
             &pageSize=10&sortField=RELEVANCE&profession=36&courseType=CD_ANYTIME&sortShufflingSeed=27
         `
-        console.log('bget new ', url)
+        // Get data from API courses
         await axios.get(url)
         .then(res => {
             
@@ -118,19 +113,23 @@ export default class CoursesCard extends Component {
 
                 this.setState({
                     courses: data,
-                    coursesInitial: data,
                     totalItems: res.data.totalItems,
                     pagination: pagination
                 })
 
             }
         })
-        console.log()
+        .catch(err => {
+            console.log('Error to get data from server')
+        })
+       
     }
 
     // When clicked prev button, search in chache data
     previous = () => {
+        // Get current page 
         let page = this.state.currentPage
+        // The page to show is one before it
         page --   
         
         // If there not prev pages return
@@ -186,62 +185,58 @@ export default class CoursesCard extends Component {
 
     render() {
         let values = ['Relevance']
-        return(
-            
-            <div>
-                <div className="courses-pagination">
-                    <div className="pagination">
-                        <div>
-                            <strong>Page {this.state.currentPage}</strong> of
-                            <strong> {this.state.totalItems} </strong>                            
-                        </div>
-                        <div>
-                            <SkipPrevious onClick={this.previous.bind(this)} className="btn"/>
-                            <SkipNext onClick={this.next.bind(this)} className="btn"/>
-                        </div>
-                    <SelectElement className="select3"
-                        id="select3"    
-                        name="select3"
-                        valueDefault="Relevance"
-                        values={values}
-                        >
-                    </SelectElement>
+        return( 
+
+            <div className="courses-pagination">
+                <div className="pagination">
+                    <div>
+                        <strong>Page {this.state.currentPage}</strong> of
+                        <strong> {this.state.totalItems} </strong>                            
                     </div>
-                    <div id="featured-container">
-                        <FeaturedCourses/>
+                    <div>
+                        <SkipPrevious onClick={this.previous.bind(this)} className="btn"/>
+                        <SkipNext onClick={this.next.bind(this)} className="btn"/>
                     </div>
-                    {   
-                        this.state.courses.map((item, i) => {   
-                            return(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                            <div key={i} className="CoursesCard">                            
-                                <div className="information-container">
-                                    <h2 className="name">{ item.name }</h2>
-                                    <h3 className="provider">{ item.provider }</h3>
-                                    <CustomTag 
-                                        hours={item.totalHours}
-                                        method={item.deliveryMethod.description}
-                                        />
-                                </div>
-                                <div className="price-container">
-                                    <div className="text-price">
-                                        { item.isFree ? <span>Free</span> : 
-                                        <span>$ {item.price}</span> }
-                                    </div>
-                                    <div>
-                                        <div className="icon-arrow">
-                                            <Reply className="icon-3"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            </div> 
-                            )
-                        })
-                    }
-                    </div>
+                <SelectElement className="select3"
+                    id="select3"    
+                    name="select3"
+                    valueDefault="Relevance"
+                    values={values}
+                    >
+                </SelectElement>
                 </div>
-            
-        
+                <div id="featured-container">
+                    <FeaturedCourses/>
+                </div>
+                {   
+                    this.state.courses.map((item, i) => {   
+                        return(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                        <div key={i} className="CoursesCard">                            
+                            <div className="information-container">
+                                <h2 className="name">{ item.name }</h2>
+                                <h3 className="provider">{ item.provider }</h3>
+                                <CustomTag 
+                                    hours={item.totalHours}
+                                    method={item.deliveryMethod.description}
+                                    />
+                            </div>
+                            <div className="price-container">
+                                <div className="text-price">
+                                    { item.isFree ? <span>Free</span> : 
+                                    <span>$ {item.price}</span> }
+                                </div>
+                                <div>
+                                    <div className="icon-arrow">
+                                        <Reply className="icon-3"/>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div> 
+                        )
+                    })
+                }
+            </div>
         )
     }
 }
