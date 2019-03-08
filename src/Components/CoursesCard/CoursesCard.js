@@ -23,23 +23,26 @@ export default class CoursesCard extends Component {
             currentPage: 1,
             nextPage: 2,
             prevPage: 1,
+            coursesInitial: [],
             pagination: []
         }
 
         this.courseToSearch = ''
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
         // Capture the filter element
         let element = document.getElementById('inputSearch')
         this.setState({searchBar: element})
+
+        // Call to data API
+        await this.getCourses(this.state.currentPage)
         
         // Connect keyup event to handler function
         element.addEventListener('keyup', this.searchCourse.bind(this))
 
-        // Call to data API
-        this.getCourses(this.state.currentPage)
+       
     }
 
     // Filter courses
@@ -49,10 +52,13 @@ export default class CoursesCard extends Component {
             filterActived: true,
             courses: this.state.coursesInitial            
         })
+
+        console.log('courses ', this.state.courses)
+
         let textToSearch = this.state.searchBar.value
 
         // Start to seach when there are 2 letters or more writed in the search bar
-        if (textToSearch.length < 2) {
+         if (textToSearch.length < 2) {
             this.setState({
                 courses: this.state.coursesInitial
             })
@@ -60,7 +66,7 @@ export default class CoursesCard extends Component {
             this.showElement('#featured-container')
             return 
         }
-        
+       
         // Filtering courses in order to data entry 
         let filtered = this.state.courses.filter((data) => {
             console.log('haciendo operacion de filtro', data.name, textToSearch, data.name.indexOf(textToSearch))
@@ -114,7 +120,8 @@ export default class CoursesCard extends Component {
                 this.setState({
                     courses: data,
                     totalItems: res.data.totalItems,
-                    pagination: pagination
+                    pagination: pagination,
+                    coursesInitial: data
                 })
 
             }
@@ -147,7 +154,8 @@ export default class CoursesCard extends Component {
         //Update state
         this.setState({
             currentPage: page,
-            courses: currentCourses
+            courses: currentCourses,
+            coursesInitial: currentCourses
         })
 
        
