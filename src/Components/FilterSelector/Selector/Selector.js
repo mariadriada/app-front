@@ -7,7 +7,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
-
 import './Selector.scss'
 
 

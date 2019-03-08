@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-
 import ClockIcon from '@material-ui/icons/AccessTime';
 import Computer from '@material-ui/icons/Computer';
-
 import './CustomTag.scss'
 
 

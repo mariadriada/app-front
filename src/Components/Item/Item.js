@@ -15,22 +15,8 @@ class Item extends Component {
             isActive: false,  
             content: this.props.content ,  
             name: ''                  
-        }     
-      
+        } 
     }   
-/*
-    componentDidMount() {
-        console.log('Componente a montar ')
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshop) {
-        console.log('==================', prevState, snapshop)
-    }
-
-
-    componentWillUnmount() {
-        console.log('*********desmonta')
-    }*/
 
     // Control menu option is clicked
     async handleClick (e) {
@@ -62,9 +48,7 @@ class Item extends Component {
         let className = 'item';
         let idbtn = `${className}${this.props.id}`
         this.state.name = idbtn
-        /*if (this.state.isActive) {
-            className += ' item-active';
-        }*/
+     
         return (             
             <div className="item-link">
                 <a href="#" onClick={this.handleClick.bind(this)} 

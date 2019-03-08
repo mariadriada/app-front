@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-
-import axios from 'axios'
-import './FeaturedCourses.scss'
-
 import CustomTag from '../CustomTag/CustomTag'
 import Reply from '@material-ui/icons/Reply';
-import Button from '@material-ui/core/Button';
+import axios from 'axios'
+import './FeaturedCourses.scss'
 
 
 export default class FeaturedCourses extends Component {
@@ -17,13 +14,9 @@ export default class FeaturedCourses extends Component {
             featured: [],
             url: 'https://storage.cebroker.com/CEBroker/'
         }
-
-       // this.url = 'https://storage.cebroker.com/CEBroker/'
     }
 
     componentDidMount() {
-        console.log('componentDidMount featuresd')
-
         // Call to data API
         this.getFeaturedCourses()
     }
@@ -43,7 +36,6 @@ export default class FeaturedCourses extends Component {
                         name: coursePublication.course.name,
                         totalHours: coursePublication.totalHours,
                         provider: coursePublication.course.provider.name,
-                        //img: coursePublication.course.featuredBanner,
                         img: this.getUrl(coursePublication.course.featuredBanner),
                         isFree: coursePublication.course.isFree
                     }                 
@@ -59,10 +51,7 @@ export default class FeaturedCourses extends Component {
 
     // Concat Url to img
     getUrl = (img) => {
-        console.log('geturl')
-        //const url =         
         return `${this.state.url}${img}`
-        //<img src={item.img} alt="img"></img>
     }
 
     render() {
@@ -107,8 +96,6 @@ export default class FeaturedCourses extends Component {
                 })
             }
             </div>
-            
-        
         )
     }
 }

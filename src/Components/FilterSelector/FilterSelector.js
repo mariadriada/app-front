@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Selector from './Selector/Selector'
 import FilterList from '@material-ui/icons/FilterList';
-
 import './FilterSelector.scss'
+
 
 export default class FilterSelector extends Component {
 
@@ -66,8 +66,7 @@ export default class FilterSelector extends Component {
                         )
                     })
                 }
-            </div>
-            
+            </div>            
         )
     }
 }

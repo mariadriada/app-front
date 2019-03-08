@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import './Logo.scss'
 import logoimg from '../../static/img/logo.jpg'
 

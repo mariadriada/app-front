@@ -8,8 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import CoursesCard from '../CoursesCard/CoursesCard'
 import FilterSelector from '../FilterSelector/FilterSelector'
-
 import './Tabs.scss'
+
 
 function TabContainer({ children, dir }) {
   return (
