@@ -30,18 +30,17 @@ export default class CoursesCard extends Component {
         this.courseToSearch = ''
     }
 
-    async componentDidMount() {
-
+    componentDidMount() {
+        
         // Capture the filter element
         let element = document.getElementById('inputSearch')
         this.setState({searchBar: element})
 
         // Call to data API
-        await this.getCourses(this.state.currentPage)
+        this.getCourses(this.state.currentPage)
         
         // Connect keyup event to handler function
         element.addEventListener('keyup', this.searchCourse.bind(this))
-
        
     }
 
