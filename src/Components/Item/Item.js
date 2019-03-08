@@ -13,42 +13,40 @@ class Item extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.state = {
             isActive: false,  
-            content: this.props.content ,
-                    
-        }
-       
+            content: this.props.content ,  
+            name: ''                  
+        }     
+      
     }   
+/*
+    componentDidMount() {
+        console.log('Componente a montar ')
+    }
 
     componentDidUpdate(prevProps, prevState, snapshop) {
         console.log('==================', prevState, snapshop)
     }
 
-  
+
+    componentWillUnmount() {
+        console.log('*********desmonta')
+    }*/
 
     // Control menu option is clicked
-    handleClick = (e) => {
-        e.preventDefault();  
-        
-        this.setState({
-            isActive: true,
-            contador: this.contador= this.contador++
-        })
-        this.setState({
-            isActive: true
-        })
+    async handleClick (e) {
+        e.preventDefault(); 
         
         this.clearActivedItems()  
         
-        this.setState({
-            isActive: !this.state.isActive  
+        await this.setState({
+            isActive: true  
         })
-        console.log('click', this.state.isActive)
+        // Update class
+        document.querySelector(`#${this.state.name}`).classList.add('item-active')
         
-        //if (this.state.isActive)
-            this.props.component(
-                this.state.isActive ? this.state.content : ''
-            )
-            console.log('component of item', this.state)
+        this.props.component(
+            this.state.content
+        )
     };
 
     // Clear class active of all menu items
@@ -62,12 +60,15 @@ class Item extends Component {
     
     render(){
         let className = 'item';
-        if (this.state.isActive) {
+        let idbtn = `${className}${this.props.id}`
+        this.state.name = idbtn
+        /*if (this.state.isActive) {
             className += ' item-active';
-        }
-        return ( 
+        }*/
+        return (             
             <div className="item-link">
-                <a href="#" onClick={this.handleClick.bind(this)} className={className}>
+                <a href="#" onClick={this.handleClick.bind(this)} 
+                className={className} id={idbtn}>
                     { this.props.name }
                 </a>
                 { this.props.expand ? <ExpandMore className="expand" /> : '' }                

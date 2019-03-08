@@ -1,12 +1,9 @@
 
 import React, { Component } from 'react'
-
 import Button from '@material-ui/core/Button';
-
 import Logo from '../Logo/Logo'
 import Item from '../Item/Item'
 import CoursesPage from '../../Pages/CoursesPage/CoursesPage'
-
 import './Menu.scss'
 
 
@@ -24,21 +21,21 @@ class Menu extends Component {
                     name: 'Features', 
                     isActive:false, 
                     expand: false,
-                    content: <h1>Dinamic content</h1>
+                    content: <h1>Features container</h1>
                 },
                 { 
                     id: 2, 
                     name: 'Plans', 
                     isActive:false, 
                     expand: false,
-                    content: <h1>Dinamic content 2</h1>
+                    content: <h1>Plans container</h1>
                 },
                 { 
                     id: 3, 
                     name: 'Organizations', 
                     isActive:false, 
                     expand: true,
-                    content: <h1>Dinamic content 3</h1>
+                    content: <h1>Organizations container</h1>
                 },
                 { 
                     id: 5, 
@@ -52,11 +49,16 @@ class Menu extends Component {
                     name: 'Support', 
                     isActive:false, 
                     expand: false,
-                    content: <h1>Dinamic content 4</h1>
+                    content: <h1>Support container</h1>
                 }
             ],
             component:'',
         }
+    }
+
+    componentDidMount() {
+        // Sent event click to browse courses
+        document.querySelector('#item5').click()
     }
 
     // Change of component to show in order to clicked option
@@ -81,12 +83,14 @@ class Menu extends Component {
     // TODO: Expand items when be click to expanded option
     getRenderItem(item) {
         let itemElement =  
-                    <Item key={item.id}
-                        name = { item.name } 
-                        isActive = { item.isActive }
-                        content = { item.content }
-                        component = { this.setComponent.bind(this) }
-                        expand = { item.expand }                       
+                    <Item 
+                        key={item.id}
+                        id={item.id}
+                        name={item.name} 
+                        isActive={item.isActive}
+                        content={item.content}
+                        component={this.setComponent.bind(this)}
+                        expand={item.expand}                       
                     ></Item>                
                
         return itemElement

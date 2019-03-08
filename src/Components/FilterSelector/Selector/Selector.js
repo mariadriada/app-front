@@ -6,6 +6,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
 import './Selector.scss'
 
@@ -44,7 +45,7 @@ const styles = theme => ({
         
         return(
             <div className="Selector">
-                            
+                <KeyboardArrowUp className="arrow"/>
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormLabel component="legend">{this.state.title}</FormLabel>
                     <RadioGroup

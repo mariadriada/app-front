@@ -52,8 +52,6 @@ export default class CoursesCard extends Component {
             courses: this.state.coursesInitial            
         })
 
-        console.log('courses ', this.state.courses)
-
         let textToSearch = this.state.searchBar.value
 
         // Start to seach when there are 2 letters or more writed in the search bar
@@ -61,14 +59,14 @@ export default class CoursesCard extends Component {
             this.setState({
                 courses: this.state.coursesInitial
             })
+            if (this.state.currentPage == 1)
             // Show featured clourses
             this.showElement('#featured-container')
             return 
         }
        
         // Filtering courses in order to data entry 
-        let filtered = this.state.courses.filter((data) => {
-            console.log('haciendo operacion de filtro', data.name, textToSearch, data.name.indexOf(textToSearch))
+        let filtered = this.state.courses.filter((data) => {            
             // Searching coincidences
             if (data.name.toLowerCase().indexOf(textToSearch.toLowerCase()) > -1)
             return data
