@@ -4,6 +4,9 @@ import axios from 'axios'
 import CustomTag from '../CustomTag/CustomTag'
 import Reply from '@material-ui/icons/Reply';
 import FeaturedCourses from '../FeaturedCourses/FeaturedCourses'
+import SelectElement from '../Select/Select'
+import SkipNext from '@material-ui/icons/SkipNext';
+import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import './CoursesCard.scss'
 
 
@@ -18,7 +21,13 @@ export default class CoursesCard extends Component {
             coursesInitial: [],
             totalItems: 0,
             searchBar: null,
-            filterActived: false
+            filterActived: false,
+            totalItems: null,
+            currentPage: 1,
+            nextPage: 2,
+            prevPage: 1,
+
+            pagination: []
         }
 
         this.courseToSearch = ''
@@ -34,9 +43,8 @@ export default class CoursesCard extends Component {
         // Connect keyuo event to handler function
         element.addEventListener('keyup', this.searchCourse.bind(this))
 
-        // Calls to data API
-        this.getFeaturedCourses()
-        this.getCourses()
+        // Call to data API
+        this.getCourses(this.state.currentPage)
     }
 
     // Filter courses
@@ -46,20 +54,17 @@ export default class CoursesCard extends Component {
             filterActived: true,
             courses: this.state.coursesInitial            
         })
-        console.log('buscar el curso aca ', this.state.searchBar.value)
         let textToSearch = this.state.searchBar.value
-
-        console.log('leng', textToSearch.length)
 
         // Start to seach when there are 2 letters or more writed in the search bar
         if (textToSearch.length < 2) {
             this.setState({
                 courses: this.state.coursesInitial
             })
+            // Show featured clourses
+            this.showElement('#featured-container')
             return 
         }
-
-        console.log('continua')
         
         // Filtering courses in order to data entry 
         let filtered = this.state.courses.filter((data) => {
@@ -70,7 +75,8 @@ export default class CoursesCard extends Component {
             
         })
 
-        console.log('Cursos filtrados ', filtered)
+        // hidden featured courses
+        this.hiddenElement('#featured-container')
         // Update state with filtered courses
         this.setState({
             courses: filtered
@@ -79,24 +85,19 @@ export default class CoursesCard extends Component {
     }
 
     // Request to courses API
-    getCourses() {
-        axios.get('https://api.cebroker.com/v2/search/courses/?expand=totalItems&pageIndex=1&pageSize=10&sortField=RELEVANCE&profession=36&courseType=CD_ANYTIME&sortShufflingSeed=27')
+    async getCourses(page) {
+        let url = `
+            https://api.cebroker.com/v2/search/courses/?expand=totalItems&pageIndex=
+            ${page}
+            &pageSize=10&sortField=RELEVANCE&profession=36&courseType=CD_ANYTIME&sortShufflingSeed=27
+        `
+        console.log('bget new ', url)
+        await axios.get(url)
         .then(res => {
             
             if (res.status === 200) {
-                console.log(res.status, res.data)
-
-                let items = JSON.stringify(res.data.items);
-
-                console.log('items', items)
-
-                             
-                let data = res.data.items.map((value) => {
-
-                    console.log('Recorriendo', res.data.items)
-                    //let coursePublication = value.coursePublication 
-
-                    //console.log('courses', value)
+                let items = JSON.stringify(res.data.items);                             
+                let data = res.data.items.map((value) => {                      
                     return {
                         name: value.course.name,
                         type: value.course.type,
@@ -105,56 +106,108 @@ export default class CoursesCard extends Component {
                         hasPrice: value.hasPrice,
                         price: value.price,
                         provider: value.course.provider.name,                        
-                        isFree: value.isFree
+                        isFree: value.isFree                        
                     }               
                 })
 
-               console.log('result ', data)
+                // Add cache of courses
+                let pagination = this.state.pagination;
+                pagination.push({
+                    data
+                })
 
                 this.setState({
                     courses: data,
-                    coursesInitial: data
+                    coursesInitial: data,
+                    totalItems: res.data.totalItems,
+                    pagination: pagination
                 })
 
             }
         })
+        console.log()
     }
 
-    // Request to Featured courses API
-    getFeaturedCourses() {
-        axios.get('https://api.cebroker.com/v2/featuredCoursesProfession?profession=36')
-        .then(res => {
-            
-            if (res.status === 200) {
-                console.log(res.status, res.data)
-                let dataCourse = {}
-                let data = res.data.map((value) => {
-                    let coursePublication = value.coursePublication 
+    // When clicked prev button, search in chache data
+    previous = () => {
+        let page = this.state.currentPage
+        page --   
+        
+        // If there not prev pages return
+        if ( page <= 0 ) return
 
-                    //console.log('courses', value)
-                    return {
-                        name: coursePublication.course.name,
-                        totalHours: coursePublication.totalHours,
-                        provider: coursePublication.course.provider.name,
-                        img: coursePublication.course.featuredBanner,
-                        isFree: coursePublication.course.isFree
-                    }                 
-                })
+        // index of pagination for the page
+        let currentP = page - 1        
+        // Get the data courses to show
+        let currentCourses = this.state.pagination[currentP].data       
 
-                this.setState({
-                    features: data
-                })
+         // If is the first page show featured courses
+        if ( currentP == 0 )
+        this.showElement('#featured-container')
 
-            }
+        //Update state
+        this.setState({
+            currentPage: page,
+            courses: currentCourses
         })
+
+       
     }
+
+    // When clicked next button, get from API data
+    async next() {
+        let page = this.state.currentPage +1       
+        let nextP = this.state.nextPage +1      
+               
+        //Update state, clear state of courses
+        this.setState({
+            currentPage: page,
+            nextPage: nextP,
+            courses: [],            
+        })
+
+        // hidden featured courses
+        this.hiddenElement('#featured-container')
+        await this.getCourses(this.state.nextPage)
+    }
+
+    hiddenElement(name){
+        let element = document.querySelector(name)
+        element.style.display = 'none'
+        element.style.visibility = 'hidden'
+    }
+    
+    showElement(name){
+        let element = document.querySelector(name)
+        element.style.display = 'block'
+        element.style.visibility = 'visible'
+    }
+
 
     render() {
+        let values = ['Relevance']
         return(
             
             <div>
                 <div className="courses-pagination">
-                    <div className="featured-container">
+                    <div className="pagination">
+                        <div>
+                            <strong>Page {this.state.currentPage}</strong> of
+                            <strong> {this.state.totalItems} </strong>                            
+                        </div>
+                        <div>
+                            <SkipPrevious onClick={this.previous.bind(this)} className="btn"/>
+                            <SkipNext onClick={this.next.bind(this)} className="btn"/>
+                        </div>
+                    <SelectElement className="select3"
+                        id="select3"    
+                        name="select3"
+                        valueDefault="Relevance"
+                        values={values}
+                        >
+                    </SelectElement>
+                    </div>
+                    <div id="featured-container">
                         <FeaturedCourses/>
                     </div>
                     {   
