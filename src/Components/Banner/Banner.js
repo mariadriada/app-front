@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 
-
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import './Banner.scss'
-
 import SelectElement from '../Select/Select'
 import SearchBar from '../SearchBar/SearchBar'
+import './Banner.scss'
 
 class Banner extends Component {
 

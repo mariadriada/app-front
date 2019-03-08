@@ -12,12 +12,14 @@ export default class FilterSelector extends Component {
         this.state = {
             select: [
                 {
+                    id: 1,
                     title: 'Course Type',
                     options: ['Self paced', 'Live'],
                     value: 'Self paced',
                     viewMore: false
                 },
                 {
+                    id: 2,
                     title: 'Delivery type',
                     options: [
                         'Any delivery type', 
@@ -29,6 +31,7 @@ export default class FilterSelector extends Component {
                     viewMore: true
                 },
                 {
+                    id: 3,
                     title: 'Subject area',
                     options: [
                         'Any subject area', 
@@ -54,10 +57,11 @@ export default class FilterSelector extends Component {
                     this.state.select.map((item) => {
                         return (
                          <Selector 
-                            title = { item.title } 
-                            options = { item.options }
-                            value = { item.value }
-                            viewMore ={ item.viewMore }
+                            key={item.id}
+                            title={item.title} 
+                            options={item.options}
+                            value={item.value}
+                            viewMore={item.viewMore}
                             ></Selector>
                         )
                     })

@@ -93,19 +93,18 @@ class TabsElement extends React.Component {
         >
         
           <TabContainer dir={theme.direction}>
-              <div class="tabCourses">
-                <div class="side1">
+              <div className="tabCourses">
+                <div className="side1">
                   <FilterSelector></FilterSelector>
                 </div>
-                <div class="side2">
+                <div className="side2">
                   <CoursesCard courseToSearch={this.props.textToSearch}/>
                 </div>     
               </div>
                  
           </TabContainer>
 
-          <TabContainer dir={theme.direction}>
-          { this.props.textToSearch}
+          <TabContainer dir={theme.direction}>          
             Hello Tab! :D
           </TabContainer>
         </SwipeableViews>

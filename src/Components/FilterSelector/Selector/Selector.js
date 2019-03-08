@@ -59,6 +59,7 @@ const styles = theme => ({
                         this.state.options.map((value) => {
                             return (
                                 <FormControlLabel 
+                                    key={value}
                                     value={value} 
                                     control={<Radio color="primary" />} 
                                     label={value}
