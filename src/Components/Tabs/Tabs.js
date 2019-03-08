@@ -7,6 +7,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import CoursesCard from '../CoursesCard/CoursesCard'
+import FilterSelector from '../FilterSelector/FilterSelector'
+
+import './Tabs.scss'
 
 function TabContainer({ children, dir }) {
   return (
@@ -26,12 +29,12 @@ const styles = theme => ({
       primary: 'red'
   },
   root: {
-    backgroundColor: 'white',
+    backgroundColor: '#eeeeee',
     width: '100%',
     margin: '0 auto'    
   },
   tab: {
-    backgroundColor: 'blue',   
+    backgroundColor: '#0d47a1',       
   },
   tab1: {
     color: 'white',    
@@ -42,7 +45,7 @@ const styles = theme => ({
     textAlign:'left',  
   },
   indicator: {
-    backgroundColor: 'green',
+    backgroundColor: '#00e676',
   },
 });
 
@@ -88,12 +91,22 @@ class TabsElement extends React.Component {
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
+        
           <TabContainer dir={theme.direction}>
-            <CoursesCard courseToSearch={this.props.textToSearch}/>
+              <div class="tabCourses">
+                <div class="side1">
+                  <FilterSelector></FilterSelector>
+                </div>
+                <div class="side2">
+                  <CoursesCard courseToSearch={this.props.textToSearch}/>
+                </div>     
+              </div>
+                 
           </TabContainer>
+
           <TabContainer dir={theme.direction}>
           { this.props.textToSearch}
-            Item Two
+            Hello Tab! :D
           </TabContainer>
         </SwipeableViews>
       </div>

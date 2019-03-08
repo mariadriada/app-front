@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import './Item.scss'
 
-import ExpandMore from '@material-ui/icons/ExpandMore';
 
 class Item extends Component {
 
@@ -14,7 +14,7 @@ class Item extends Component {
         this.state = {
             isActive: false,  
             content: this.props.content ,
-            contador: 1         
+                    
         }
        
     }   
@@ -23,15 +23,7 @@ class Item extends Component {
         console.log('==================', prevState, snapshop)
     }
 
-    click() {
-        
-        console.log('click estado ', this.state.contador)
-        this.setState(prevState => ({
-            contador: prevState.contador++
-        })); 
-        this.forceUpdate();
-        console.log('click estado *** ', this.state.contador)
-    }
+  
 
     // Control menu option is clicked
     handleClick = (e) => {
@@ -74,9 +66,12 @@ class Item extends Component {
             className += ' item-active';
         }
         return ( 
-            <a href="#" onClick={this.handleClick.bind(this)} className={className}>
-                { this.props.name }
-            </a>
+            <div className="item-link">
+                <a href="#" onClick={this.handleClick.bind(this)} className={className}>
+                    { this.props.name }
+                </a>
+                { this.props.expand ? <ExpandMore className="expand" /> : '' }                
+            </div>
         )
     }    
 }

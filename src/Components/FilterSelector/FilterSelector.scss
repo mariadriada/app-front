@@ -1,0 +1,15 @@
+.FilterSelector {
+    width: 100%;
+    text-align: left;
+    margin: 15px 0 0 0;
+    background-color:#fafafa;
+
+    #title {
+        font-weight: 600;
+        padding: 15px;
+        border: 1px solid #e0e0ee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

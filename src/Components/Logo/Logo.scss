@@ -1,18 +1,18 @@
 .Logo{
-    
-    border: 1px solid red;
     display: flex;
-    width: 15%;
+    width: auto;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
 
     img {
-        height: 3rem;
+        height: 2rem;
     }
 
     label {          
         height: auto;
-        font-weight: 900;        
+        font-weight: 900;    
+        font-size: 1.5rem;    
     }
     
 }

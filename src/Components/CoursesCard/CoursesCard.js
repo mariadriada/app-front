@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
 import axios from 'axios'
-import './CoursesCard.scss'
-
 import CustomTag from '../CustomTag/CustomTag'
 import Reply from '@material-ui/icons/Reply';
-import SearchBar from '../SearchBar/SearchBar';
+import FeaturedCourses from '../FeaturedCourses/FeaturedCourses'
+import './CoursesCard.scss'
 
 
 export default class CoursesCard extends Component {
@@ -52,7 +51,7 @@ export default class CoursesCard extends Component {
 
         console.log('leng', textToSearch.length)
 
-        // Start to seach when there are 3 letters or more writed in the search bar
+        // Start to seach when there are 2 letters or more writed in the search bar
         if (textToSearch.length < 2) {
             this.setState({
                 courses: this.state.coursesInitial
@@ -154,34 +153,40 @@ export default class CoursesCard extends Component {
         return(
             
             <div>
-            {            
-                this.state.courses.map((item, i) => {   
-                    return(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                    <div key={i} className="CoursesCard">
-                    { this.props.courseToSearch }
-                        <div className="information-container">
-                            <h2 className="name">{ item.name }</h2>
-                            <h3 className="provider">{ item.provider }</h3>
-                            <CustomTag 
-                                hours={item.totalHours}
-                                method={item.deliveryMethod.description}
-                                />
-                        </div>
-                        <div className="price-container">
-                            <div>
-                                { item.isFree ? <span>Free</span> : 
-                                <span>$ {item.price}</span> }
-                            </div>
-                            <div>
-                                <div><Reply className="icon-3"/></div>
-                            </div>
-                        </div>
-                       
-                    </div> 
-                    )
-                })
-            }
-            </div>
+                <div className="courses-pagination">
+                    <div className="featured-container">
+                        <FeaturedCourses/>
+                    </div>
+                    {   
+                        this.state.courses.map((item, i) => {   
+                            return(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                            <div key={i} className="CoursesCard">                            
+                                <div className="information-container">
+                                    <h2 className="name">{ item.name }</h2>
+                                    <h3 className="provider">{ item.provider }</h3>
+                                    <CustomTag 
+                                        hours={item.totalHours}
+                                        method={item.deliveryMethod.description}
+                                        />
+                                </div>
+                                <div className="price-container">
+                                    <div className="text-price">
+                                        { item.isFree ? <span>Free</span> : 
+                                        <span>$ {item.price}</span> }
+                                    </div>
+                                    <div>
+                                        <div className="icon-arrow">
+                                            <Reply className="icon-3"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div> 
+                            )
+                        })
+                    }
+                    </div>
+                </div>
             
         
         )

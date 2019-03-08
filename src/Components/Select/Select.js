@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
-import { isNullOrUndefined } from 'util';
 
 import './Select.scss'
 
@@ -21,7 +18,7 @@ const BootstrapInput = withStyles(theme => ({
     borderRadius: 2,
     position: 'relative',
     border: '1px solid #ced4da',
-    fontSize: 16,
+    fontSize: 20,
     color: '#ced4da',
     fill: 'red',
     width: 'auto',
@@ -29,8 +26,8 @@ const BootstrapInput = withStyles(theme => ({
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
       'BlinkMacSystemFont',
+      '-apple-system',      
       '"Segoe UI"',
       'Roboto',
       '"Helvetica Neue"',
@@ -57,7 +54,7 @@ const styles = theme => ({
     margin: theme.spacing.unit,
   },
   bootstrapFormLabel: {
-    fontSize: 18,
+    fontSize: 120,
   },
   iconComponent: {
       fill: 'red'

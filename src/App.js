@@ -5,7 +5,6 @@ import Menu from './Components/Menu/Menu'
 import './App.scss';
 
 
-
 class App extends Component {
 
   constructor(props) {
@@ -26,7 +25,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main-container">
-          <header className="App-header">
+          <header className="App-header" >
             <Menu changePage={this.onChangePage.bind(this)}></Menu>
           </header>        
           <section className="dinamic-content">

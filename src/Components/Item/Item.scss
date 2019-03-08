@@ -1,3 +1,14 @@
-.item-active{
-    color: green;
+.item-link {
+    padding: 5px;
+    display: flex; 
+
+    a {
+        text-decoration: none;
+      
+    }
+
+    .item-active{
+        color: #00e676;
+    }
 }
+

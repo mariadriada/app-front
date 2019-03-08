@@ -1,12 +1,11 @@
 
 import React, { Component } from 'react'
 
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
 import Logo from '../Logo/Logo'
 import Item from '../Item/Item'
-import CoursesPage from '../CoursesPage/CoursesPage'
+import CoursesPage from '../../Pages/CoursesPage/CoursesPage'
 
 import './Menu.scss'
 
@@ -81,15 +80,15 @@ class Menu extends Component {
     //Get item element
     // TODO: Expand items when be click to expanded option
     getRenderItem(item) {
-        let itemElement =  <div key={item.id} className="div-item">
-                    <Item 
-                        name={item.name} 
-                        isActive={item.isActive}
-                        content={item.content}
-                        component={this.setComponent.bind(this)}
-                />
-                { item.expand ? <ExpandMore /> : '' }
-                </div>
+        let itemElement =  
+                    <Item key={item.id}
+                        name = { item.name } 
+                        isActive = { item.isActive }
+                        content = { item.content }
+                        component = { this.setComponent.bind(this) }
+                        expand = { item.expand }                       
+                    ></Item>                
+               
         return itemElement
     }
 
@@ -102,14 +101,16 @@ class Menu extends Component {
 
         return ( 
             <div className="Menu">
-                <Logo name={this.state.nameLogo} />
-                { listItems }
-                <Button variant="outlined" className="btnSignIn">
-                    Sign in
-                </Button>
-                <Button variant="contained" className="btnTrial">
-                    7 days trial
-                </Button>
+                <div className="logo-container"><Logo name={this.state.nameLogo} /></div>
+                <div className="items-container">{ listItems }</div>
+                <div className="btns-container">
+                    <Button variant="outlined" className="btnSignIn">
+                        Sign in
+                    </Button>
+                    <Button variant="contained" className="btnTrial">
+                        7 days trial
+                    </Button>
+                </div>
             </div>         
            
         )

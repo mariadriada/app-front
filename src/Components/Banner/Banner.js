@@ -46,7 +46,7 @@ class Banner extends Component {
             <div className="Banner">
 
                 <div className="block">
-                    <label>Find CE for</label> 
+                    <label>Find CE for a </label> 
 
                     <SelectElement
                         id="select1"    

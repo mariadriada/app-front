@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
-import Banner from '../Banner/Banner'
-import TabsElement from '../Tabs/Tabs'
+import Banner from '../../Components/Banner/Banner'
+import TabsElement from '../../Components/Tabs/Tabs'
 
-
-import './CoursesPage.scss'
 
 class CoursesPage extends Component {
 
